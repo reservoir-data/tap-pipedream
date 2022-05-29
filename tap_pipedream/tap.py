@@ -6,10 +6,11 @@ from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
 from singer_sdk.streams import RESTStream
 
-from tap_pipedream.streams import UserSources
+from tap_pipedream.streams import UserSources, Webhooks
 
 STREAM_TYPES: list[type[RESTStream]] = [
     UserSources,
+    Webhooks,
 ]
 
 
