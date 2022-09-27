@@ -569,7 +569,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "pyupgrade"
-version = "2.38.0"
+version = "2.38.2"
 description = "A tool to automatically upgrade syntax for newer versions."
 category = "dev"
 optional = false
@@ -776,7 +776,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "<3.11,>=3.7.1"
-content-hash = "e913f3f98340e3c8cff5659cd8adcc7fe50008800fd52ad9e9c41e86efcb7028"
+content-hash = "2b02d5625a35d7ca2205974a086560aaf772aabbcd134e2f22f5fb760e0c1e79"
 
 [metadata.files]
 appdirs = [
@@ -1179,8 +1179,8 @@ pytzdata = [
     {file = "pytzdata-2020.1.tar.gz", hash = "sha256:3efa13b335a00a8de1d345ae41ec78dd11c9f8807f522d39850f2dd828681540"},
 ]
 pyupgrade = [
-    {file = "pyupgrade-2.38.0-py2.py3-none-any.whl", hash = "sha256:e68e033603de3b4b675c7bd733723fb2bb7930a1898b6da61fb503643322e2f9"},
-    {file = "pyupgrade-2.38.0.tar.gz", hash = "sha256:7d03766fb5d68e9b0ec86b7d48c3cc29462b0031ff48ceece34bd224708553c0"},
+    {file = "pyupgrade-2.38.2-py2.py3-none-any.whl", hash = "sha256:41bb9a9fd48fe57163b0dacffff433d6d5a63a0f7c2402918917b5f1a533342b"},
+    {file = "pyupgrade-2.38.2.tar.gz", hash = "sha256:a5d778c9de0b53975c6a9eac2d0df5adfad244a9f7d7993d8a114223ebbda367"},
 ]
 requests = [
     {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},
