@@ -4,14 +4,8 @@ from __future__ import annotations
 
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
-from singer_sdk.streams import RESTStream
 
-from tap_pipedream.streams import UserSources, Webhooks
-
-STREAM_TYPES: list[type[RESTStream]] = [
-    UserSources,
-    Webhooks,
-]
+from tap_pipedream import streams
 
 
 class TapPipedream(Tap):
@@ -31,6 +25,11 @@ class TapPipedream(Tap):
             th.IntegerType,
             description="Earliest timestamp to get data from",
         ),
+        th.Property(
+            "organizations",
+            th.ArrayType(th.StringType),
+            description="List of organization IDs to get data from",
+        ),
     ).to_dict()
 
     def discover_streams(self) -> list[Stream]:
@@ -39,4 +38,17 @@ class TapPipedream(Tap):
         Returns:
             A list of Pipedream streams.
         """
-        return [stream_class(tap=self) for stream_class in STREAM_TYPES]
+        tap_streams: list[Stream] = [
+            streams.UserSources(self),
+            streams.Webhooks(self),
+        ]
+
+        if self.config.get("organizations"):
+            tap_streams.extend(
+                [
+                    streams.OrganizationSources(self),
+                    streams.OrganizationSubscriptions(self),
+                ]
+            )
+
+        return tap_streams
