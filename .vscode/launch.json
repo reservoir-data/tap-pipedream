@@ -5,14 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "[[ tap_package_command_line_name ]]",
+            "name": "tap-pipedream",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "program": "[[ tap_package_import_name ]]",
+            "program": "tap-pipedream",
             "args": [
                 "--config",
-                ".secrets/config.json",
+                "ENV",
             ],
         },
     ]
