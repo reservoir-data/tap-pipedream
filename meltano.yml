@@ -18,17 +18,21 @@ plugins:
     - catalog
     - discover
     settings:
-    # TODO: To configure using Meltano, declare settings and their types here:
     - name: token
       kind: password
       label: API Token
       description: API Token for Pipedream
+    - name: organizations
+      kind: array
+      label: Organizations
+      description: List of organization IDs to get data from
     - name: start_date
       kind: date_iso8601
       label: Start Date
       description: Earliest datetime to get data from
     config:
       start_date: 1641016800
+      organizations: ["o_DZIqGy"]
   loaders:
   - name: target-jsonl
     variant: andyh1203

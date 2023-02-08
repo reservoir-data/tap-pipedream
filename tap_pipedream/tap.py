@@ -40,6 +40,7 @@ class TapPipedream(Tap):
         """
         tap_streams: list[Stream] = [
             streams.UserSources(self),
+            streams.UserSubscriptions(self),
             streams.Webhooks(self),
         ]
 
