@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 from singer_sdk import typing as th
 
 from tap_pipedream.client import PipedreamStream
@@ -90,7 +92,25 @@ class UserSources(PipedreamStream):
                             "method",
                             th.StringType,
                         ),
-                        th.Property("params", th.ArrayType(th.ObjectType())),
+                        th.Property(
+                            "params",
+                            th.ArrayType(
+                                th.ObjectType(
+                                    th.Property(
+                                        "name",
+                                        th.StringType,
+                                    ),
+                                    th.Property(
+                                        "value",
+                                        th.StringType,
+                                    ),
+                                    th.Property(
+                                        "disabled",
+                                        th.BooleanType,
+                                    ),
+                                ),
+                            ),
+                        ),
                         th.Property(
                             "tab",
                             th.StringType,
@@ -112,6 +132,54 @@ class UserSources(PipedreamStream):
             ),
         ),
     ).to_dict()
+
+    def get_child_context(self, record: dict, context: dict | None) -> dict:
+        """Return a dictionary of child context objects.
+
+        Args:
+            record: A dictionary representing one record from the API response.
+            context: A dictionary of any context objects from the parent stream.
+
+        Returns:
+            A context dictionary.
+        """
+        return {"source_id": record["id"]}
+
+
+class UserSourceEvents(PipedreamStream):
+    """User Source Events stream."""
+
+    name = "user_source_events"
+    path = "/sources/{source_id}/events"
+    primary_keys = ["id"]
+    parent_stream_type = UserSources
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("source_id", th.StringType),
+        th.Property("e", th.StringType),
+        th.Property("ts", th.IntegerType),
+        th.Property("key", th.StringType),
+    ).to_dict()
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: str | None,
+    ) -> dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization.
+
+        Args:
+            context: A dictionary of any context objects from the parent stream.
+            next_page_token: A string representing the next page of results.
+
+        Returns:
+            A dictionary of values to be used in URL parameterization.
+        """
+        return {
+            "expand": "event",
+            "limit": 100,
+        }
 
 
 class UserSubscriptions(PipedreamStream):
@@ -174,4 +242,8 @@ class Webhooks(PipedreamStream):
     ).to_dict()
 
 
-# class WorkflowEmits(
+class OrganizationSourceEvents(UserSourceEvents):
+    """Organization Source Events stream."""
+
+    name = "organization_source_events"
+    parent_stream_type = OrganizationSources
