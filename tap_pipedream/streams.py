@@ -133,7 +133,11 @@ class UserSources(PipedreamStream):
         ),
     ).to_dict()
 
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    def get_child_context(
+        self,
+        record: dict,
+        context: dict | None,  # noqa: ARG002
+    ) -> dict:
         """Return a dictionary of child context objects.
 
         Args:
@@ -164,8 +168,8 @@ class UserSourceEvents(PipedreamStream):
 
     def get_url_params(
         self,
-        context: dict | None,
-        next_page_token: str | None,
+        context: dict | None,  # noqa: ARG002
+        next_page_token: str | None,  # noqa: ARG002
     ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
 

@@ -51,7 +51,7 @@ class TapPipedream(Tap):
                     streams.OrganizationSources(self),
                     streams.OrganizationSubscriptions(self),
                     streams.OrganizationSourceEvents(self),
-                ]
+                ],
             )
 
         return tap_streams

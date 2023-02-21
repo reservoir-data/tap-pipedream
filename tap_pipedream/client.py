@@ -13,7 +13,7 @@ class PipedreamStream(RESTStream):
 
     url_base = "https://api.pipedream.com/v1"
     records_jsonpath = "$.data[*]"
-    next_page_token_jsonpath = "$.page_info.end_cursor"
+    next_page_token_jsonpath = "$.page_info.end_cursor"  # noqa: S105
 
     page_size = 100
 
@@ -43,7 +43,7 @@ class PipedreamStream(RESTStream):
 
     def get_url_params(
         self,
-        context: dict | None,
+        context: dict | None,  # noqa: ARG002
         next_page_token: str | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.
