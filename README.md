@@ -11,7 +11,7 @@
   </a>
 </div>
 
-Singer tap for Pipedream. Built with the [Meltano Singer SDK](https://sdk.meltano.com).
+Singer tap for [Pipedream](https://pipedream.com/). Built with the [Meltano Singer SDK](https://sdk.meltano.com).
 
 </div>
 
