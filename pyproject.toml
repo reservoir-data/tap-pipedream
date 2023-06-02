@@ -45,8 +45,11 @@ ignore_missing_imports = true
 module = ["backoff.*"]
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
 build-backend = "poetry_dynamic_versioning.backend"
+requires = [
+  "poetry-core>=1",
+  "poetry-dynamic-versioning",
+]
 
 [tool.poetry.scripts]
 # CLI declaration
@@ -76,6 +79,9 @@ line-length = 88
 select = ["ALL"]
 src = ["tap_pipedream", "tests"]
 target-version = "py37"
+unfixable = [
+  "ERA001",  # commented-out-code
+]
 
 [tool.ruff.per-file-ignores]
 "noxfile.py" = ["ANN"]
@@ -87,6 +93,7 @@ target-version = "py37"
 
 [tool.ruff.isort]
 known-first-party = ["tap_pipedream"]
+required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.pydocstyle]
 convention = "google"
