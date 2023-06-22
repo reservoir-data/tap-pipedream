@@ -9,6 +9,9 @@
   <a href="https://github.com/edgarrmondragon/tap-pipedream/blob/main/LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/edgarrmondragon/tap-pipedream"/>
   </a>
+  <a href="https://github.com/astral-sh/ruff">
+    <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json" alt="Ruff" style="max-width:100%;">
+  </a>
 </div>
 
 Singer tap for [Pipedream](https://pipedream.com/). Built with the [Meltano Singer SDK](https://sdk.meltano.com).
