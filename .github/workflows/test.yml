@@ -14,7 +14,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
-      - tap_checkly/**
+      - tap_pipedream/**
       - tests/**
       - noxfile.py
       - poetry.lock
