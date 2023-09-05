@@ -16,7 +16,7 @@ keywords = [
 ]
 
 [tool.poetry.dependencies]
-python = "<3.12,>=3.7.1"
+python = "<3.12,>=3.8"
 singer-sdk = "~=0.31.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -78,7 +78,7 @@ ignore = [
 line-length = 88
 select = ["ALL"]
 src = ["tap_pipedream", "tests"]
-target-version = "py37"
+target-version = "py38"
 unfixable = [
   "ERA001",  # commented-out-code
 ]
