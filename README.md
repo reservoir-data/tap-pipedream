@@ -12,6 +12,9 @@
   <a href="https://github.com/astral-sh/ruff">
     <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json" alt="Ruff" style="max-width:100%;">
   </a>
+  <a href="https://pypi.org/p/tap-pipedream/">
+    <img alt="Python versions" src="https://img.shields.io/pypi/pyversions/tap-pipedream"/>
+  </a>
 </div>
 
 Singer tap for [Pipedream](https://pipedream.com/). Built with the [Meltano Singer SDK](https://sdk.meltano.com).
@@ -61,22 +64,21 @@ tap-pipedream --config CONFIG --discover > ./catalog.json
 ### Initialize your Development Environment
 
 ```bash
-pipx install poetry
-poetry install
+pipx install hatch
 ```
 
 ### Create and Run Tests
 
-Create tests within the `tests` subfolder and then run:
+Run integration tests:
 
 ```bash
-poetry run pytest
+hatch run tests:integration
 ```
 
-You can also test the `tap-pipedream` CLI interface directly using `poetry run`:
+You can also test the `tap-pipedream` CLI interface directly:
 
 ```bash
-poetry run tap-pipedream --help
+hatch run sync:console -- --about --format=json
 ```
 
 ### Testing with [Meltano](https://www.meltano.com)
