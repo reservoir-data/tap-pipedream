@@ -14,7 +14,7 @@ class UserSources(PipedreamStream):
 
     name = "user_sources"
     path = "/users/me/sources/"
-    primary_keys = ("id",)
+    primary_keys = ("id",)  # type: ignore[assignment]
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -135,9 +135,9 @@ class UserSources(PipedreamStream):
 
     def get_child_context(
         self,
-        record: dict,
-        context: dict | None,  # noqa: ARG002
-    ) -> dict:
+        record: dict[str, Any],
+        context: dict[str, Any] | None,  # noqa: ARG002
+    ) -> dict[str, Any]:
         """Return a dictionary of child context objects.
 
         Args:
@@ -155,7 +155,7 @@ class UserSourceEvents(PipedreamStream):
 
     name = "user_source_events"
     path = "/sources/{source_id}/events"
-    primary_keys = ("id",)
+    primary_keys = ("id",)  # type: ignore[assignment]
     parent_stream_type = UserSources
 
     schema = th.PropertiesList(
@@ -168,7 +168,7 @@ class UserSourceEvents(PipedreamStream):
 
     def get_url_params(
         self,
-        context: dict | None,  # noqa: ARG002
+        context: dict[str, Any] | None,  # noqa: ARG002
         next_page_token: str | None,  # noqa: ARG002
     ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
@@ -191,7 +191,7 @@ class UserSubscriptions(PipedreamStream):
 
     name = "user_subscriptions"
     path = "/users/me/subscriptions"
-    primary_keys = ("id",)
+    primary_keys = ("id",)  # type: ignore[assignment]
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -205,7 +205,7 @@ class _BaseOrganizationStream(PipedreamStream):
     """Base Organization stream."""
 
     @property
-    def partitions(self) -> list[dict] | None:
+    def partitions(self) -> list[dict[str, Any]] | None:
         """Return a list of partitions.
 
         Returns:
@@ -233,7 +233,7 @@ class Webhooks(PipedreamStream):
 
     name = "webhooks"
     path = "/users/me/webhooks"
-    primary_keys = ("id",)
+    primary_keys = ("id",)  # type: ignore[assignment]
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),

@@ -8,7 +8,7 @@ from singer_sdk import RESTStream
 from singer_sdk.authenticators import BearerTokenAuthenticator
 
 
-class PipedreamStream(RESTStream):
+class PipedreamStream(RESTStream[str]):
     """Pipedream stream class."""
 
     url_base = "https://api.pipedream.com/v1"
@@ -31,19 +31,17 @@ class PipedreamStream(RESTStream):
         )
 
     @property
-    def http_headers(self) -> dict:
+    def http_headers(self) -> dict[str, str]:
         """Return the http headers needed.
 
         Returns:
             A dictionary of HTTP headers.
         """
-        headers = {}
-        headers["User-Agent"] = f"{self.tap_name}/{self._tap.plugin_version}"
-        return headers
+        return {"User-Agent": f"{self.tap_name}/{self._tap.plugin_version}"}
 
     def get_url_params(
         self,
-        context: dict | None,  # noqa: ARG002
+        context: dict[str, Any] | None,  # noqa: ARG002
         next_page_token: str | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.
