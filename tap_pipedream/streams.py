@@ -14,7 +14,7 @@ class UserSources(PipedreamStream):
 
     name = "user_sources"
     path = "/users/me/sources/"
-    primary_keys = ("id",)  # type: ignore[assignment]
+    primary_keys = ("id",)
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -155,7 +155,7 @@ class UserSourceEvents(PipedreamStream):
 
     name = "user_source_events"
     path = "/sources/{source_id}/events"
-    primary_keys = ("id",)  # type: ignore[assignment]
+    primary_keys = ("id",)
     parent_stream_type = UserSources
 
     schema = th.PropertiesList(
@@ -191,7 +191,7 @@ class UserSubscriptions(PipedreamStream):
 
     name = "user_subscriptions"
     path = "/users/me/subscriptions"
-    primary_keys = ("id",)  # type: ignore[assignment]
+    primary_keys = ("id",)
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -233,7 +233,7 @@ class Webhooks(PipedreamStream):
 
     name = "webhooks"
     path = "/users/me/webhooks"
-    primary_keys = ("id",)  # type: ignore[assignment]
+    primary_keys = ("id",)
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
