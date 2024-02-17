@@ -72,7 +72,7 @@ pipx install hatch
 Run integration tests:
 
 ```bash
-hatch run tests:integration
+hatch run test:integration
 ```
 
 You can also test the `tap-pipedream` CLI interface directly:
