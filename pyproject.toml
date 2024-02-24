@@ -66,7 +66,6 @@ check = "mypy --strict {args:tap_pipedream tests}"
 [tool.ruff]
 line-length = 88
 src = ["tap_pipedream", "tests"]
-target-version = "py38"
 
 [tool.ruff.lint]
 ignore = [
