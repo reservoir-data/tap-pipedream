@@ -37,6 +37,9 @@ dynamic = [
 dependencies = [
   "singer-sdk~=0.39.0",
 ]
+optional-dependencies.dev = [
+  "tap-pipedream[testing,typing]",
+]
 optional-dependencies.testing = [
   "deptry>=0.12",
   "pytest>=7.4",
@@ -45,13 +48,24 @@ optional-dependencies.testing = [
 optional-dependencies.typing = [
   "mypy",
 ]
-urls.documentation = "https://github.com/edgarrmondragon/tap-pipedream#readme"
-urls.homepage = "https://github.com/edgarrmondragon/tap-pipedream"
-urls.repository = "https://github.com/edgarrmondragon/tap-pipedream"
-scripts."tap-pipedream" = "tap_pipedream.tap:TapPipedream.cli"
+urls.Documentation = "https://github.com/edgarrmondragon/tap-pipedream#readme"
+urls.Homepage = "https://github.com/edgarrmondragon/tap-pipedream"
+urls.Repository = "https://github.com/edgarrmondragon/tap-pipedream"
+scripts.tap-pipedream = "tap_pipedream.tap:TapPipedream.cli"
 
 [tool.hatch.version]
 source = "vcs"
+
+[tool.hatch.envs.default]
+installer = "uv"
+
+[tool.hatch.envs.default.env-vars]
+UV_PRERELEASE = "allow"
+
+[tool.hatch.envs.default.overrides]
+env.GITHUB_ACTIONS.dev-mode = { value = false, if = [
+  "true",
+] }
 
 [tool.hatch.envs.sync.scripts]
 console = "tap-pipedream {args}"
@@ -61,9 +75,22 @@ jsonl = "tap-pipedream {args} > tap-pipedream.jsonl"
 features = [
   "testing",
 ]
+
 [tool.hatch.envs.test.scripts]
 integration = "pytest {args:tests}"
 dependencies = "deptry ."
+
+[tool.hatch.envs.all]
+template = "test"
+[[tool.hatch.envs.all.matrix]]
+python = [
+  "3.8",
+  "3.9",
+  "3.10",
+  "3.11",
+  "3.12",
+  "3.13",
+]
 
 [tool.hatch.envs.typing]
 features = [
@@ -126,8 +153,10 @@ max_supported_python = "3.13"
 addopts = "-vvv"
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 warn_redundant_casts = true
+warn_return_any = true
+warn_no_return = true
 warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
