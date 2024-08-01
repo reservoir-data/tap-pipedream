@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Any
+import typing as t
 
 from singer_sdk import RESTStream
 from singer_sdk.authenticators import BearerTokenAuthenticator
+
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
 
 
 class PipedreamStream(RESTStream[str]):
@@ -41,9 +44,9 @@ class PipedreamStream(RESTStream[str]):
 
     def get_url_params(
         self,
-        context: dict[str, Any] | None,  # noqa: ARG002
+        context: Context | None,  # noqa: ARG002
         next_page_token: str | None,
-    ) -> dict[str, Any]:
+    ) -> dict[str, t.Any]:
         """Get URL query parameters.
 
         Args:
