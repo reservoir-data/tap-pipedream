@@ -7,7 +7,7 @@ requires = [
 
 [project]
 name = "tap-pipedream"
-description = "`tap-pipedream` is a Singer tap for Pipedream, built with the Meltano SDK for Singer Taps."
+description = "Singer tap for Pipedream, built with the Meltano SDK for Singer Taps."
 readme = "README.md"
 keywords = [
   "ELT",
