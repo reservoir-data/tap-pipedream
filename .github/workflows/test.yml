@@ -65,7 +65,7 @@ jobs:
 
     - name: Run
       env:
-        HATCH_PYTHON: ${{ matrix.python-version }}
+        HATCH_PYTHON: ${{ steps.setup-python.outputs.python-version }}
         HATCH_VERBOSE: "1"
         TAP_PIPEDREAM_TOKEN: ${{ secrets.TAP_PIPEDREAM_TOKEN }}
       run: |
