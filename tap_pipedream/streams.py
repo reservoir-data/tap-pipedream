@@ -208,7 +208,7 @@ class _BaseOrganizationStream(PipedreamStream):
     """Base Organization stream."""
 
     @property
-    def partitions(self) -> list[Context] | None:
+    def partitions(self) -> list[dict] | None:
         """Return a list of partitions.
 
         Returns:
