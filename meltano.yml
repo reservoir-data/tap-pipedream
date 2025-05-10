@@ -10,7 +10,7 @@ plugins:
     label: Pipedream
     namespace: pipedream
     description: Pipedream is an integration platform for developers.
-    repository: https://github.com/edgarrmondragon/tap-pipedream
+    repo: https://github.com/edgarrmondragon/tap-pipedream
     docs: https://github.com/edgarrmondragon/tap-pipedream#readme
     pip_url: -e .
     capabilities:
