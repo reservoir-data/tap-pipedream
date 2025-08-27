@@ -37,9 +37,9 @@ dynamic = [
 dependencies = [
   "singer-sdk~=0.48.0",
 ]
-urls.Documentation = "https://github.com/edgarrmondragon/tap-pipedream#readme"
-urls.Homepage = "https://github.com/edgarrmondragon/tap-pipedream"
-urls.Repository = "https://github.com/edgarrmondragon/tap-pipedream"
+urls.Documentation = "https://github.com/reservoir-data/tap-pipedream#readme"
+urls.Homepage = "https://github.com/reservoir-data/tap-pipedream"
+urls.Repository = "https://github.com/reservoir-data/tap-pipedream"
 scripts.tap-pipedream = "tap_pipedream.tap:TapPipedream.cli"
 
 [dependency-groups]
