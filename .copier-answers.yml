@@ -4,9 +4,9 @@ _src_path: gh:reservoir-data/singer-tap-copier-template
 author_email: edgarrm358@gmail.com
 author_fullname: Edgar Ramírez-Mondragón
 author_username: edgarrmondragon
-python_main_version: '3.10'
+python_main_version: '3.13'
 repository_name: tap-pipedream
-repository_namespace: edgarrmondragon
+repository_namespace: reservoir-data
 repository_provider: github.com
 tap_auth_method: Bearer Token
 tap_id: tap-pipedream
