@@ -27,11 +27,7 @@ class PipedreamStream(RESTStream[str]):
         Returns:
             The authenticator instance for this REST stream.
         """
-        token: str = self.config["token"]
-        return BearerTokenAuthenticator.create_for_stream(
-            self,
-            token=token,
-        )
+        return BearerTokenAuthenticator(token=self.config["token"])
 
     @property
     def http_headers(self) -> dict[str, str]:
