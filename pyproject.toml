@@ -150,12 +150,6 @@ warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
 
-[[tool.mypy.overrides]]
-ignore_missing_imports = true
-module = [
-  "backoff.*",
-]
-
 [tool.uv]
 prerelease = "allow"
 required-version = ">=0.7.0"
