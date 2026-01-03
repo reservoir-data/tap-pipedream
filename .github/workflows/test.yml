@@ -7,7 +7,6 @@ on:
     - tap_pipedream/**
     - tests/**
     - pyproject.toml
-    - tox.ini
     - uv.lock
     - .github/workflows/test.yml
   pull_request:
@@ -16,12 +15,15 @@ on:
     - tap_pipedream/**
     - tests/**
     - pyproject.toml
-    - tox.ini
     - uv.lock
     - .github/workflows/test.yml
   schedule:
   - cron: "0 10 * * *"
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   FORCE_COLOR: "1"
@@ -36,12 +38,12 @@ env:
 
 jobs:
   tests:
+    name: Integration
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
         python-version:
-        - "3.11"
         - "3.12"
         - "3.13"
         - "3.14"
@@ -67,6 +69,7 @@ jobs:
         tox -e ${{ matrix.python-version }}
 
   lint:
+    name: Lint
     runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -86,6 +89,7 @@ jobs:
       run: tox -e dependencies
 
   pre-commit:
+    name: pre-commit
     runs-on: ubuntu-24.04
     steps:
     - name: Checkout code
