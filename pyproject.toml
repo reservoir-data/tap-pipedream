@@ -22,10 +22,9 @@ maintainers = [
 authors = [
   { name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" },
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
@@ -48,11 +47,12 @@ dev = [
 ]
 testing = [
   "deptry>=0.12",
-  "pytest>=7.4",
+  "pytest>=9",
   "singer-sdk[testing]",
 ]
 typing = [
   "mypy",
+  "ty>=0.0.8",
 ]
 
 [tool.hatch.version]
@@ -99,12 +99,18 @@ lint.pydocstyle.convention = "google"
 
 [tool.deptry.package_module_name_map]
 mypy = "mypy"
+ty = "ty"
 
 [tool.pyproject-fmt]
 max_supported_python = "3.14"
 
-[tool.pytest.ini_options]
-addopts = "-vvv"
+[tool.pytest]
+addopts = [
+  "-vvv",
+  "-ra",
+  "--strict-config",
+  "--strict-markers",
+]
 filterwarnings = [
   "error",
   "default:No records were available to test:UserWarning",
@@ -113,9 +119,11 @@ filterwarnings = [
   "default:No records returned in stream 'user_subscriptions':UserWarning",
   "default:No records returned in stream 'webhooks':UserWarning",
   "default:Fields in transformed catalog but not in records:UserWarning",
-  # Deprecation message introduced in Python 3.14. Upstream PR: https://github.com/litl/backoff/pull/220
-  "default:'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16:DeprecationWarning",
 ]
+log_level = "INFO"
+minversion = "9"
+testpaths = [ "tests" ]
+xfail_strict = true
 
 [tool.tox]
 min_version = "4.22"
@@ -129,7 +137,6 @@ env_list = [
   "3.14",
   "3.13",
   "3.12",
-  "3.11",
 ]
 
 [tool.tox.env_run_base]
@@ -144,9 +151,18 @@ commands = [ [ "deptry", "." ] ]
 
 [tool.tox.env.typing]
 dependency_groups = [ "testing", "typing" ]
-commands = [ [ "mypy", "--strict", { replace = "posargs", default = [ "tap_pipedream", "tests" ], extend = true } ] ]
+commands = [
+  [ "mypy", "--strict", { replace = "posargs", default = [ "tap_pipedream", "tests" ], extend = true } ],
+  [ "ty", "check", { replace = "posargs", default = [ "tap_pipedream", "tests" ], extend = true } ],
+]
 
 [tool.mypy]
+enable_error_code = [
+  "ignore-without-code",
+  "redundant-expr",
+  "truthy-bool",
+]
+strict = true
 warn_redundant_casts = true
 warn_return_any = true
 warn_no_return = true

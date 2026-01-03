@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-import typing as t
+from typing import TYPE_CHECKING, Any, override
 
 from singer_sdk import typing as th
 
 from tap_pipedream.client import PipedreamStream
 
-if t.TYPE_CHECKING:
+if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context, Record
 
 
@@ -136,11 +136,12 @@ class UserSources(PipedreamStream):
         ),
     ).to_dict()
 
+    @override
     def get_child_context(
         self,
         record: Record,
-        context: Context | None,  # noqa: ARG002
-    ) -> dict[str, t.Any]:
+        context: Context | None,
+    ) -> dict[str, Any]:
         """Return a dictionary of child context objects.
 
         Args:
@@ -169,11 +170,12 @@ class UserSourceEvents(PipedreamStream):
         th.Property("key", th.StringType),
     ).to_dict()
 
+    @override
     def get_url_params(
         self,
-        context: Context | None,  # noqa: ARG002
-        next_page_token: str | None,  # noqa: ARG002
-    ) -> dict[str, t.Any]:
+        context: Context | None,
+        next_page_token: str | None,
+    ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
         Args:
@@ -207,8 +209,9 @@ class UserSubscriptions(PipedreamStream):
 class _BaseOrganizationStream(PipedreamStream):
     """Base Organization stream."""
 
+    @override
     @property
-    def partitions(self) -> list[dict[str, t.Any]] | None:
+    def partitions(self) -> list[dict[str, Any]] | None:
         """Return a list of partitions.
 
         Returns:
