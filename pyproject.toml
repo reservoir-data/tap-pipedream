@@ -15,7 +15,6 @@ keywords = [
   "singer.io",
 ]
 license = "Apache-2.0"
-license-files = [ "LICENSE" ]
 requires-python = ">=3.12"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
@@ -27,7 +26,7 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "singer-sdk~=0.54.0a4",
+  "singer-sdk~=0.54.4",
 ]
 [[project.authors]]
 name = "Edgar Ramírez-Mondragón"
@@ -44,32 +43,29 @@ Repository = "https://github.com/reservoir-data/tap-pipedream"
 
 [dependency-groups]
 dev = [
+  "deptry>=0.25.1",
   { include-group = "testing" },
   { include-group = "typing" },
 ]
 testing = [
-  "deptry>=0.12",
   "pytest>=9",
   "singer-sdk[testing]",
 ]
 typing = [
-  "mypy",
-  "ty>=0.0.8",
+  "mypy>=2.1",
+  "ty>=0.0.40",
 ]
 
 [tool.hatch.version]
+fallback-version = "0.0.0.dev0"
 source = "vcs"
 
 [tool.uv]
-required-version = ">=0.7.0"
+required-version = ">=0.11"
 prerelease = "allow"
 
 [tool.ruff]
 line-length = 88
-src = [
-  "tap_pipedream",
-  "tests",
-]
 [tool.ruff.lint]
 select = [
   "ALL",
@@ -90,12 +86,6 @@ per-file-ignores."tests/*" = [
 unfixable = [
   "ERA001", # commented-out-code
 ]
-isort.known-first-party = [
-  "tap_pipedream",
-]
-isort.required-imports = [
-  "from __future__ import annotations",
-]
 pydocstyle.convention = "google"
 
 [tool.deptry.package_module_name_map]
@@ -105,12 +95,24 @@ ty = "ty"
 [tool.pyproject-fmt]
 table_format = "long"
 
+[tool.mypy]
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_return_any = true
+warn_unreachable = true
+enable_error_code = [
+  "ignore-without-code",
+  "redundant-expr",
+  "truthy-bool",
+]
+strict = true
+warn_unused_configs = true
+
 [tool.pytest]
 addopts = [
-  "-vvv",
+  "-v",
   "-ra",
-  "--strict-config",
-  "--strict-markers",
 ]
 filterwarnings = [
   "error",
@@ -123,26 +125,25 @@ filterwarnings = [
 ]
 log_level = "INFO"
 minversion = "9"
+strict = true
 testpaths = [ "tests" ]
-xfail_strict = true
 
 [tool.tox]
-min_version = "4.22"
 requires = [
-  "tox>=4.22",
-  "tox-uv",
+  "tox>=4.55",
+  "tox-uv>=1.35",
 ]
 env_list = [
   "dependencies",
   "typing",
-  { product = [
-    { prefix = "3.", start = 12 },
-  ] },
+  { prefix = "3.", start = 12 },
 ]
 [tool.tox.env.dependencies]
-dependency_groups = [ "testing" ]
+description = "check for unused, missing and transitive dependencies"
+dependency_groups = [ "dev" ]
 commands = [ [ "deptry", "." ] ]
 [tool.tox.env.typing]
+description = "type checks"
 dependency_groups = [ "testing", "typing" ]
 commands = [
   [ "mypy", { replace = "posargs", default = [ "tap_pipedream", "tests" ], extend = true } ],
@@ -151,20 +152,8 @@ commands = [
 
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
-pass_env = [ "TAP_PIPEDREAM_*" ]
+description = "run unit tests on Python {py_dot_ver}"
 dependency_groups = [ "testing" ]
+pass_env = [ "TAP_PIPEDREAM_*" ]
 commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
-
-[tool.mypy]
-enable_error_code = [
-  "ignore-without-code",
-  "redundant-expr",
-  "truthy-bool",
-]
-strict = true
-warn_redundant_casts = true
-warn_return_any = true
-warn_no_return = true
-warn_unreachable = true
-warn_unused_configs = true
-warn_unused_ignores = true
+base_python_file = [ ".python-version" ]

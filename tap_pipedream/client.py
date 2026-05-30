@@ -23,11 +23,7 @@ class PipedreamStream(RESTStream[str]):
     @override
     @property
     def authenticator(self) -> BearerTokenAuthenticator:
-        """Get an authenticator object.
-
-        Returns:
-            The authenticator instance for this REST stream.
-        """
+        """Get an authenticator object."""
         return BearerTokenAuthenticator(token=self.config["token"])
 
     @override
@@ -36,15 +32,7 @@ class PipedreamStream(RESTStream[str]):
         context: Context | None,
         next_page_token: str | None,
     ) -> dict[str, Any]:
-        """Get URL query parameters.
-
-        Args:
-            context: Stream sync context.
-            next_page_token: Next offset.
-
-        Returns:
-            Mapping of URL query parameters.
-        """
+        """Get URL query parameters."""
         return {
             "limit": self.page_size,
             "after": next_page_token,

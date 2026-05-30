@@ -35,7 +35,6 @@ Singer tap for [Pipedream](https://pipedream.com/). Built with the [Meltano Sing
 | Setting | Required | Default | Description |
 |:--------------------|:--------:|:-------:|:------------|
 | token | True | None | API Token for Pipedream |
-| start_date | False | None | Earliest timestamp to get data from |
 | stream_maps | False | None | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
 | stream_map_config | False | None | User-defined config values to be used within map expressions. |
 | flattening_enabled | False | None | 'True' to enable schema flattening and automatically expand nested properties. |

@@ -20,12 +20,8 @@ class TapPipedream(Tap):
             "token",
             th.StringType,
             required=True,
+            secret=True,
             description="API Token for Pipedream",
-        ),
-        th.Property(
-            "start_date",
-            th.IntegerType,
-            description="Earliest timestamp to get data from",
         ),
         th.Property(
             "organizations",

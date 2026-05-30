@@ -142,15 +142,7 @@ class UserSources(PipedreamStream):
         record: Record,
         context: Context | None,
     ) -> dict[str, Any]:
-        """Return a dictionary of child context objects.
-
-        Args:
-            record: A dictionary representing one record from the API response.
-            context: A dictionary of any context objects from the parent stream.
-
-        Returns:
-            A context dictionary.
-        """
+        """Return a dictionary of child context objects."""
         return {"source_id": record["id"]}
 
 
@@ -176,15 +168,7 @@ class UserSourceEvents(PipedreamStream):
         context: Context | None,
         next_page_token: str | None,
     ) -> dict[str, Any]:
-        """Return a dictionary of values to be used in URL parameterization.
-
-        Args:
-            context: A dictionary of any context objects from the parent stream.
-            next_page_token: A string representing the next page of results.
-
-        Returns:
-            A dictionary of values to be used in URL parameterization.
-        """
+        """Return a dictionary of values to be used in URL parameterization."""
         return {
             "expand": "event",
             "limit": 100,
@@ -212,11 +196,7 @@ class _BaseOrganizationStream(PipedreamStream):
     @override
     @property
     def partitions(self) -> list[dict[str, Any]] | None:
-        """Return a list of partitions.
-
-        Returns:
-            A list of partitions.
-        """
+        """Return a list of partitions."""
         return [{"org_id": org_id} for org_id in self.config.get("organizations", [])]
 
 
