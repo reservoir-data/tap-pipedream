@@ -88,10 +88,6 @@ unfixable = [
 ]
 pydocstyle.convention = "google"
 
-[tool.deptry.package_module_name_map]
-mypy = "mypy"
-ty = "ty"
-
 [tool.pyproject-fmt]
 table_format = "long"
 
